@@ -1,0 +1,5 @@
+<h4 class="text-gray-800 text-lg mb-4">To get started, name your game:</h4>
+<%= form_with model: @game do |form| %>
+  <%= form.text_field :name, class: "border bg-gray-100 rounded-xl p-2"%>
+  <%= form.submit "save", class: "text-white bg-blue-500 py-2 px-4 rounded-xl border border-blue-500 ml-2" %>
+<% end %>

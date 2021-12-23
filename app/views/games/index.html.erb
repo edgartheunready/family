@@ -1,0 +1,11 @@
+  <h1 class="text-xl ">Welcome to Family!<h1>
+  <div> Pick a game or start a new one:</div>
+  <ul class="border border-gray-800 rounded p-4 space-y-2">
+    <% Game.order('id desc').each do |game| %>
+    <li class="rounded hover:bg-blue-500 hover:text-white p-2 bg-gray-200">
+      <%= link_to "#{game.name} (#{game.names.size})", game_path(game), class: "w-full" %>  
+    </li>
+    <% end %>
+  </ul>
+  <br>
+  <%= link_to "New Game", new_game_path(), class: " rounded bg-gray-800 text-white p-3" %>

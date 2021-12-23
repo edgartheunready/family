@@ -1,0 +1,21 @@
+<div> <%= link_to " < Back to games list", games_path %></div>
+<h4 class=""><%= @game.name %></h4>
+<div><%= @game.names.size%>'s players joined</div>
+
+<br>
+<%= link_to "Add/Edit your Name", new_game_name_path(@game), class: 'p-4 rounded bg-blue-500 text-white'%>
+<br>
+
+
+<%= %>
+<% if @game.session_id.to_s == session.id.to_s %>
+  <br>
+  Since you made the game, you see all the names :)
+  <ul class="space-y-2">
+  <% @game.names.each do |name| %>
+  <li class="bg-gray-800 rounded text-white p-2">
+    <%= name.name %>  
+  </li>
+  <% end %>
+</ul>
+<% end %>
