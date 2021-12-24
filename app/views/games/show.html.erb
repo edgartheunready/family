@@ -1,9 +1,24 @@
-<div> <%= link_to " < Back to games list", games_path %></div>
+<div class="bold text-lg bg-gray-500"> <%= link_to " < Back to games list", games_path %></div>
+
+<% your_name =  @game.names.find_by(session_id: session.id.to_s).name rescue nil%>
+kid_mode: <%= session[:kid_mode] == 't' %>
+<% if your_name.present? && session[:kid_mode] != 't' %>
+  (Hey <span class="text-red-500 text-lg"><%= @game.names.find_by(session_id: session.id.to_s).name rescue ' i dunno. i cant fix it live... it is too much pressure'%></span>)
+<% elsif session[:kid_mode] == 't'%>
+  (The last name was a kid name, so we are hiding the adult's name)
+<% end %>
 <h4 class=""><%= @game.name %></h4>
-<div><%= @game.names.size%>'s players joined</div>
+<div><%= @game.names.size%> players have joined</div>
 
 <br>
-<%= link_to "Add/Edit your Name", new_game_name_path(@game), class: 'p-4 rounded bg-blue-500 text-white'%>
+
+<br>
+<%= link_to "Add/Edit your Name", new_game_name_path(@game, kid_mode: false), class: 'p-4 rounded bg-blue-500 text-white'%>
+<br>
+
+<br>
+<br>
+<%= link_to "Kid Name", new_game_name_path(@game, kid_mode: true), class: 'p-4 rounded bg-blue-500 text-white'%>
 <br>
 
 
@@ -12,7 +27,7 @@
   <br>
   Since you made the game, you see all the names :)
   <ul class="space-y-2">
-  <% @game.names.each do |name| %>
+  <% @game.names.to_a.shuffle.each do |name| %>
   <li class="bg-gray-800 rounded text-white p-2">
     <%= name.name %>  
   </li>

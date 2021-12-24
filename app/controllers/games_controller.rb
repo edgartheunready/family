@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-
+    @kid_mode = params[:kid_mode].present?
   end
 
   def new
